@@ -21,6 +21,14 @@ public class RecordAudio extends AppCompatActivity {
     private MediaRecorder recorder;
     MediaPlayer mediaPlayer;
 
+    private void ConfigureMediaRecorder(MediaRecorder recorder){
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/audio.3gp");
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +41,12 @@ public class RecordAudio extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         text = Environment.getExternalStorageDirectory().getAbsolutePath();
         final Toast toast = Toast.makeText(context, text, duration);
-
-
         //Problem with sdk 23 Runtime permissions (switched to an old target SDK (22) TO include manifest permissions statically)
 
        // if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
          //   Log.e(LOG_TAG,"Permission Denied");
         //}
-            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/audio.3gp");
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        ConfigureMediaRecorder(recorder);
         setContentView(R.layout.activity_record_audio);
 
         final Button record = (Button) this.findViewById(R.id.record_button);
@@ -75,10 +78,7 @@ public class RecordAudio extends AppCompatActivity {
                 try{
                     recorder.stop();
                     recorder.reset();
-                    recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                    recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                    recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/audio.3gp");
-                    recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                    ConfigureMediaRecorder(recorder);
                 }catch(Exception e){
                     Log.e(LOG_TAG, e.toString());
                 }
