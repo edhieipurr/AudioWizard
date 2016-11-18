@@ -28,6 +28,19 @@ public class RecordAudio extends AppCompatActivity {
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
     }
 
+    private void PlayRecorderAudio(MediaPlayer mediaPlayer){
+        try{
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getAbsolutePath()+"/audio.3gp");
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        }catch (Exception e){
+            Log.e(LOG_TAG, e.toString());
+        }
+
+
+    }
+
 
 
     @Override
@@ -67,7 +80,7 @@ public class RecordAudio extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                toast.show();
+                //toast.show();
 
             }
         });
@@ -88,14 +101,7 @@ public class RecordAudio extends AppCompatActivity {
 
         play.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                try{
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getAbsolutePath()+"/audio.3gp");
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-                }catch(Exception e){
-                    Log.e(LOG_TAG, e.toString());
-                }
+                    PlayRecorderAudio(mediaPlayer);
             }
         });
     }
