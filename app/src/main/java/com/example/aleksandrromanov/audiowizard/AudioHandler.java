@@ -75,6 +75,7 @@ class AudioHandler {
         try{
             mediaPlayer.reset();
             mediaPlayer.setDataSource(pathToMediaFile);
+            mediaPlayer.setPlaybackParams(params.setSpeed(1.0f));
             mediaPlayer.setPlaybackParams(params.setPitch(2.0f));
             mediaPlayer.prepare();
             mediaPlayer.start();
@@ -90,7 +91,7 @@ class AudioHandler {
         try{
             mediaPlayer.reset();
             mediaPlayer.setDataSource(pathToMediaFile);
-            //mediaPlayer.setPlaybackParams(params.setPitch(1.0f));
+            mediaPlayer.setPlaybackParams(params.setPitch(1.0f));
             mediaPlayer.setPlaybackParams(params.setSpeed(0.3f));
 
             mediaPlayer.prepare();
@@ -107,6 +108,7 @@ class AudioHandler {
         try{
             mediaPlayer.reset();
             mediaPlayer.setDataSource(pathToMediaFile);
+            mediaPlayer.setPlaybackParams(params.setSpeed(0.3f));
             mediaPlayer.setPlaybackParams(params.setPitch(10f));
             mediaPlayer.prepare();
             mediaPlayer.start();

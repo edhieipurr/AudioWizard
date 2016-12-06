@@ -25,6 +25,7 @@ public class SoundFilterActivity extends AppCompatActivity {
         darth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 audioHandler.PlayVaderSound();
                 Log.v(LOG_TAG,"VADER");
             }
@@ -33,6 +34,7 @@ public class SoundFilterActivity extends AppCompatActivity {
         hamster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 audioHandler.PlayHamsterSound();
                 Log.v(LOG_TAG,"HAMSTER");
             }
@@ -41,6 +43,7 @@ public class SoundFilterActivity extends AppCompatActivity {
         reverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 audioHandler.PlayReverseSound();
                 Log.v(LOG_TAG,"REVERSE");
             }
@@ -49,6 +52,7 @@ public class SoundFilterActivity extends AppCompatActivity {
         snail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 audioHandler.PlaySnailSound();
                 Log.v(LOG_TAG,"SNAIL");
             }
