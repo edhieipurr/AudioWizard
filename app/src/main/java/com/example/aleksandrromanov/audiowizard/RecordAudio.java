@@ -13,19 +13,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.io.IOException;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 
 public class RecordAudio extends AppCompatActivity {
 
     private static final String LOG_TAG = "RecordAudio";
     private String[] perms = {"android.permission.RECORD_AUDIO", "android.permission.WRITE_EXTERNAL_STORAGE"};
     private static int MY_PERMISSIONS_REQUEST = 200;
-    private AudioHandler audioHandler = new AudioHandler();
-
+    protected AudioHandler audioHandler = new AudioHandler();
 
 
     @Override
@@ -46,29 +45,27 @@ public class RecordAudio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         requestPermissions(perms, MY_PERMISSIONS_REQUEST);
         setContentView(R.layout.activity_record_audio);
         final ImageView record = (ImageView) this.findViewById(R.id.mic);
+        final TextView status = (TextView) this.findViewById(R.id.record_state);
         final ImageView stop = (ImageView) this.findViewById(R.id.stop);
         stop.setEnabled(false);
-        final TextView status = (TextView) this.findViewById(R.id.record_state);
         status.setVisibility(View.INVISIBLE);
-
         record.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 status.setVisibility(View.VISIBLE);
                 stop.setEnabled(true);
                 record.setEnabled(false);
                 record.setImageResource(R.drawable.mic_working);
-                   // try {
-                        //audioHandler.recorder.prepare();
-                        //audioHandler.recorder.start();
+                   try {
+                       audioHandler.recorder.prepare();
+                       audioHandler.recorder.start();
 
-                    //} catch (IOException e) {
-                     //   e.printStackTrace();
-                    //}
-                //toast.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
             }
         });
         stop.setOnClickListener(new View.OnClickListener(){
@@ -77,15 +74,17 @@ public class RecordAudio extends AppCompatActivity {
                 status.setVisibility(View.INVISIBLE);
                 record.setImageResource(R.drawable.mix);
                 Intent intent = new Intent(getApplicationContext(), SoundFilterActivity.class);
-                startActivity(intent);
-//                try{
-                    //audioHandler.recorder.stop();
-                    //audioHandler.recorder.reset();
-                    //audioHandler.ConfigureMediaRecorder();
 
-                //}catch(Exception e){
-                  //  Log.e(LOG_TAG, e.toString());
-                //}
+                startActivity(intent);
+
+                try{
+                    audioHandler.recorder.stop();
+                    audioHandler.recorder.reset();
+                    audioHandler.ConfigureMediaRecorder();
+
+                }catch(Exception e){
+                    Log.e(LOG_TAG, e.toString());
+                }
                 stop.setEnabled(true);
             }
         });

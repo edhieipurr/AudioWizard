@@ -12,6 +12,8 @@ import android.util.Log;
 class AudioHandler {
 
     private static final String LOG_TAG = "AudioHandler";
+    protected String pathToMediaFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/audio.mp4";
+
 
     MediaRecorder recorder;
     MediaPlayer mediaPlayer;
@@ -27,7 +29,7 @@ class AudioHandler {
         try{
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/audio.mp4");
+            recorder.setOutputFile(pathToMediaFile);
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         }catch (Exception e){
             Log.e(LOG_TAG, e.toString());
@@ -37,7 +39,7 @@ class AudioHandler {
     protected void PlayRecorderAudio(){
         try{
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(Environment.getExternalStorageDirectory().getAbsolutePath()+"/audio.mp4");
+            mediaPlayer.setDataSource(pathToMediaFile);
             mediaPlayer.prepare();
             mediaPlayer.start();
         }catch (Exception e){
