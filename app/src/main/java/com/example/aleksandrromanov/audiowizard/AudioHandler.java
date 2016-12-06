@@ -60,7 +60,7 @@ class AudioHandler {
             mediaPlayer.setDataSource(pathToMediaFile);
             //ADD VADER SOUND
             mediaPlayer.setPlaybackParams(params.setPitch(0.65f));
-            mediaPlayer.setPlaybackParams(params.setSpeed(0.5f));
+            mediaPlayer.setPlaybackParams(params.setSpeed(1.0f));
             mediaPlayer.prepare();
             mediaPlayer.start();
 
